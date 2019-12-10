@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://caption"
+        messagesPack="com.company.uilab.web.screens" xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd">
+    <data>
+        <collection id="newEntitiesDc" class="com.company.uilab.entity.NewEntity" view="_local">
+            <loader id="newEntitiesDl">
+                <query>
+                    <![CDATA[select e from uilab_NewEntity e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <layout width="100%">
+        <grid spacing="true" width="100%" height="100%">
+            <columns count="3"/>
+            <rows>
+                <row flex="1">
+                    <vbox spacing="true">
+                        <button id="btnLoad" width="100%" height="100%" caption="Generate Data" icon="DATABASE"
+                                invoke="onBtnLoadClick"/>
+                        <button id="btnDelete" width="100%" height="100%" caption="Delete all Data" icon="TRASH_O"
+                                invoke="onBtnDeleteClick"/>
+                    </vbox>
+                    <table id="tblData" height="100%" width="100%" colspan="2" dataContainer="newEntitiesDc">
+                        <columns>
+                            <column id="label"/>
+                            <column id="serie1"/>
+                            <column id="serie2"/>
+                            <column id="serie3"/>
+                        </columns>
+                    </table>
+                </row>
+                <row flex="4">
+                    <chart:serialChart id="grfData" width="100%" colspan="3" height="100%"
+                                       dataContainer="newEntitiesDc" categoryField="label">
+                        <chart:graphs>
+                            <chart:graph
+                                    id="first"
+                                    valueField="serie1"/>
+                        </chart:graphs>
+                    </chart:serialChart>
+                </row>
+            </rows>
+        </grid>
+    </layout>
+</window>
